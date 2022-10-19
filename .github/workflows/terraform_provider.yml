@@ -38,7 +38,7 @@ jobs:
     - uses: actions/setup-go@v3
       with:
           go-version-file: .go-version
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       id: cache-go-pkg-mod
       timeout-minutes: 2
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       id: cache-terraform-plugin-dir
       timeout-minutes: 2
@@ -71,12 +71,12 @@ jobs:
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
     - if: steps.cache-terraform-plugin-dir.outputs.cache-hit != 'true' || steps.cache-terraform-plugin-dir.outcome == 'failure'
-      uses: actions/cache@v3
+      uses: actions/cache@v3.0.11
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
     - if: steps.cache-terraform-plugin-dir.outputs.cache-hit != 'true' || steps.cache-terraform-plugin-dir.outcome == 'failure'
-      uses: actions/cache@v3
+      uses: actions/cache@v3.0.11
       with:
         path: ~/go/pkg/mod
         key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
@@ -90,7 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       id: cache-terraform-providers-schema
       timeout-minutes: 2
@@ -98,7 +98,7 @@ jobs:
         path: terraform-providers-schema
         key: ${{ runner.os }}-terraform-providers-schema-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
     - if: steps.cache-terraform-providers-schema.outputs.cache-hit != 'true' || steps.cache-terraform-providers-schema.outcome == 'failure'
-      uses: actions/cache@v3
+      uses: actions/cache@v3.0.11
       timeout-minutes: 2
       with:
         path: terraform-plugin-dir
@@ -132,13 +132,13 @@ jobs:
     - name: go env
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('aws/**') }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
@@ -161,13 +161,13 @@ jobs:
     - name: go env
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
@@ -195,13 +195,13 @@ jobs:
     - name: go env
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
@@ -279,13 +279,13 @@ jobs:
     - name: go env
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
@@ -310,13 +310,13 @@ jobs:
     - name: go env
       run: |
         echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ${{ env.GOCACHE }}
         key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('aws/**') }}
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
@@ -333,14 +333,14 @@ jobs:
     - uses: actions/setup-go@v3
       with:
           go-version-file: .go-version
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       continue-on-error: true
       timeout-minutes: 2
       with:
         path: ~/go/pkg/mod
         key: ${{ runner.os }}-go-pkg-mod-${{ hashFiles('go.sum') }}
     - run: cd tools && go install github.com/bflad/tfproviderdocs
-    - uses: actions/cache@v3
+    - uses: actions/cache@v3.0.11
       timeout-minutes: 2
       with:
         path: terraform-providers-schema
@@ -371,13 +371,13 @@ jobs:
       - name: go env
         run: |
           echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
+      - uses: actions/cache@v3.0.11
         continue-on-error: true
         timeout-minutes: 2
         with:
           path: ${{ env.GOCACHE }}
           key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
-      - uses: actions/cache@v3
+      - uses: actions/cache@v3.0.11
         continue-on-error: true
         timeout-minutes: 2
         with:
